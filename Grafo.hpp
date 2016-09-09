@@ -6,17 +6,15 @@
 #include <vector>
 #include<string>
 
-using namespace std;
-
 class Grafo
 {
 	public:
 		Grafo operator=(Grafo& g);
-		Grafo(string nomeArq);
-		int obterNumNos();
-		vector<int> operator[](int pos);
+		Grafo(std::string nomeArq);
+		int obterNumNos(void);
+		std::vector<int> operator[](int pos);
 	private:
-		vector<vector<int> > grafo;
+		std::vector<std::vector<int> > grafo;
 };
 
 #endif

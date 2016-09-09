@@ -41,31 +41,23 @@ bool TabelasConvergiram(vector<Node*> nos)
 
 int main(int argc,char **argv){
 
-	string nomeArq;
-	vector<Node*> nos;
-
-	try{
+	try
+	{
+		string nomeArq;
+		vector<Node*> nos;
 		if(1 == argc){
-
 			cout <<"Informe o nome do arquivo\n";
 			cin >> nomeArq;
-
 		}
-
-		else {
-
+		else
+		{
 			nomeArq = argv[1];
-
 		}
-	
 		Grafo g(nomeArq);
-
-		for(unsigned int i = 0 ; i < (unsigned int)g.obterNumNos(); i ++){
-
+		for(unsigned int i = 0 ; i < (unsigned int)g.obterNumNos(); i ++)
+		{
 			nos[i] = new Node(g[i]);
-
 		}
-
 		int numeroInteracoes=0;
 		while(!TabelasConvergiram(nos))
 		{
@@ -82,16 +74,12 @@ int main(int argc,char **argv){
 				}
 			}
 		}
-
 	}
-
 	catch(string *str)
 	{
 		cout << *str << endl;
 	}
-		
-return(0);
-
+	return(0);
 }
 
-	
+

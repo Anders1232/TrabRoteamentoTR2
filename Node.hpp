@@ -27,17 +27,15 @@ struct RegRoteamento{
 	}
 };
 
-using namespace std;
-
 class Node
 {
 	public:
-		Node(vector<int> adj);
-		void receberTabela(const vector<RegRoteamento> &tabEstrangeira);
-		const vector<RegRoteamento> obterTabela(void);
+		Node(std::vector<int> adj);
+		void receberTabela(const std::vector<RegRoteamento> &tabEstrangeira);
+		const std::vector<RegRoteamento> obterTabela(void);
 		void imprimirTabela(void) ;
 	private:
-		vector<RegRoteamento> tabela;
+		std::vector<RegRoteamento> tabela;
 };
 
 #endif

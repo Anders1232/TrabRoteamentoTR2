@@ -4,15 +4,15 @@
 
 //#define DEBUG
 
-Grafo::Grafo(string nomeArq)
-{	
+Grafo::Grafo(std::string nomeArq)
+{
 	FILE *arq;
 	char aux;
 
 	arq = fopen(nomeArq.c_str(),"r");
 	if(arq == NULL)
 	{
-		throw(new string("Erro ao abrir o arquivo!\n"));
+		throw(new std::string("Erro ao abrir o arquivo!\n"));
 	}
 #ifdef DEBUG
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
@@ -74,7 +74,7 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 //printf("origem: %d\tdestino: %d\tpeso: %d\n", origem, destino, peso);
 #endif
-			throw(new string("Arquivo no formato invalido!\n"));
+			throw(new std::string("Arquivo no formato invalido!\n"));
 		}
 
 		do
@@ -105,13 +105,12 @@ printf("origem: %d\tdestino: %d\tpeso: %d\n", origem, destino, peso);
 	fclose(arq);
 }
 
-int Grafo::obterNumNos(){
-
+int Grafo::obterNumNos(void)
+{
 	return(grafo.size());
-
 }
 
-vector<int> Grafo::operator[](int pos)
+std::vector<int> Grafo::operator[](int pos)
 {
 	return grafo[pos];
 }
