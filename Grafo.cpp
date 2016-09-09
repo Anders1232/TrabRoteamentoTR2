@@ -10,17 +10,14 @@ Grafo::Grafo(string nomeArq)
 	char aux;
 
 	arq = fopen(nomeArq.c_str(),"r");
-
-	if(arq == NULL){
-
+	if(arq == NULL)
+	{
 		throw(new string("Erro ao abrir o arquivo!\n"));
-
 	}
 #ifdef DEBUG
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #endif
 	int numeroDeLinhas=1;//o arquivo já começa com 1 linha
-
 	while(EOF != fscanf(arq, "%c", &aux))
 	{
 #ifdef DEBUG
@@ -106,5 +103,4 @@ printf("origem: %d\tdestino: %d\tpeso: %d\n", origem, destino, peso);
 		grafo[cont][cont]= 0;
 	}
 	fclose(arq);
-
 }
