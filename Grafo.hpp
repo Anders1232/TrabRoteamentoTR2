@@ -13,6 +13,8 @@ class Grafo
 	public:
 		Grafo operator=(Grafo& g);
 		Grafo(string nomeArq);
+		int obterNumNos();
+		vector<int> operator[](int pos);
 	private:
 		vector<vector<int> > grafo;
 };

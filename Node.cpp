@@ -11,7 +11,7 @@ Node::Node(vector<int> adj)
 	}
 }
 
-void Node::receberTabela(vector<RegRoteamento> &tabelaEstrangeira)
+void Node::receberTabela(const vector<RegRoteamento> &tabelaEstrangeira)
 {
 	int quemEnviou, posicaoNaTabelaLocalDeQuemEnviou;
 	for(unsigned int i = 0 ; i < tabelaEstrangeira.size() ; i ++)
@@ -62,11 +62,28 @@ void Node::receberTabela(vector<RegRoteamento> &tabelaEstrangeira)
 	}
 }
 
-void enviarTabela(void)
-{
+const vector<RegRoteamento> Node::obterTabela(void){
 	
+	return(tabela);
+
 }
 
+void Node::imprimirTabela(void){
+	for(unsigned int i = 0 ; i < tabela.size() ; i ++){
+		
+			if(tabela[i].peso == 0){
 
+				cout << "Imprimindo tabela do nó %d",tabela[i].destino;
+				break;
 
+			}
+	}
+
+	for(unsigned int i = 0 ; i < tabela.size() ; i ++){
+
+		cout << "\tdestino: %d \t peso: %d Nó de saída %d\n",tabela[i].destino,tabela[i].peso,tabela[i].nodeSaida;
+
+	}
+
+}
 

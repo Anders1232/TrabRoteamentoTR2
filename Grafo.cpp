@@ -104,3 +104,14 @@ printf("origem: %d\tdestino: %d\tpeso: %d\n", origem, destino, peso);
 	}
 	fclose(arq);
 }
+
+int Grafo::obterNumNos(){
+
+	return(grafo.size());
+
+}
+
+vector<int> Grafo::operator[](int pos)
+{
+	return grafo[pos];
+}
