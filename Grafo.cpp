@@ -22,9 +22,9 @@ Grafo::Grafo(FILE *arq)
 	}
 	
 	int aux1, aux2;
-	for(int cont1 =0; cont < numeroDeLinhas; cont++)
+	for(int cont1 =0; cont1 < numeroDeLinhas; cont1++)
 	{
-		for(int cont2 =0; cont < numeroDeLinhas; cont++)
+		for(int cont2 =0; cont2 < numeroDeLinhas; cont2++)
 		{
 			grafo[cont1][cont2]= INFINITO;
 		}
