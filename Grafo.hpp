@@ -1,7 +1,8 @@
 #ifndef GRAFO_HPP
 #define GRAFO_HPP
 
-#include<cstdio>
+#define INFINITO -1
+
 #include <vector>
 #include<string>
 
