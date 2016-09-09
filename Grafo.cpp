@@ -1,6 +1,8 @@
 #include"Grafo.hpp"
 #include<string>
 
+#define INFINITO -1
+
 Grafo::Grafo(FILE *arq)
 {
 	int numeroDeLinhas=1;//o arquivo já começa com 1 linha
@@ -20,6 +22,13 @@ Grafo::Grafo(FILE *arq)
 	}
 	
 	int aux1, aux2;
+	for(int cont1 =0; cont < numeroDeLinhas; cont++)
+	{
+		for(int cont2 =0; cont < numeroDeLinhas; cont++)
+		{
+			grafo[cont1][cont2]= INFINITO;
+		}
+	}
 	for(int cont =0; cont < numeroDeLinhas; cont++)
 	{//vou supor que na linha x tem as informações do nodo x, ou seja, será começado com x; 
 		if(0 == fscanf(arq, "%d;", &aux1) )
@@ -33,6 +42,7 @@ Grafo::Grafo(FILE *arq)
 		while(fscanf(arq, "%d[%d];", &aux1, &aux2))
 		{//suponho que no arquivo, os nodos do grafo estão indexados a partir de zero.
 			grafo[cont][aux]= aux2;
+			grafo[aux][cont]= aux2;
 		}
 	}
 }
