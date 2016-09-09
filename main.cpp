@@ -1,15 +1,13 @@
-#include "Grafo.hpp"
 #include <iostream>
 #include <string>
-#include<stdbool.h>
-#include"Node.hpp"
+#include <stdbool.h>
+#include "Grafo.hpp"
+#include "Node.hpp"
 
-using namespace std;
-
-bool TabelasConvergiram(vector<Node*> nos)
+bool TabelasConvergiram(std::vector<Node*> nos)
 {
 	static bool primeiraVez=true;
-	static vector<vector<RegRoteamento> > iteracaoPassada;
+	static std::vector<std::vector<RegRoteamento> > iteracaoPassada;
 	if(!primeiraVez)
 	{
 		for(unsigned int cont=0; cont < nos.size(); cont++)
@@ -43,11 +41,11 @@ int main(int argc,char **argv){
 
 	try
 	{
-		string nomeArq;
-		vector<Node*> nos;
+		std::string nomeArq;
+		std::vector<Node*> nos;
 		if(1 == argc){
-			cout <<"Informe o nome do arquivo\n";
-			cin >> nomeArq;
+			std::cout <<"Informe o nome do arquivo\n";
+			std::cin >> nomeArq;
 		}
 		else
 		{
@@ -59,25 +57,27 @@ int main(int argc,char **argv){
 			nos[i] = new Node(g[i]);
 		}
 		int numeroInteracoes=0;
+		int numeroEnviosDeTablela=0;
 		while(!TabelasConvergiram(nos))
 		{
 			numeroInteracoes++;
 			for( unsigned int cont =0 ; cont < (unsigned int)g.obterNumNos(); cont++)
 			{
-				vector<int> vizinhos= g[cont];
+				std::vector<int> vizinhos= g[cont];
 				for(unsigned int cont2=0; cont2< vizinhos.size(); cont++)
 				{
 					if(vizinhos[cont2] != INFINITO)
 					{
+						numeroEnviosDeTablela++;
 						nos[cont2]->receberTabela(nos[cont]->obterTabela());
 					}
 				}
 			}
 		}
 	}
-	catch(string *str)
+	catch(std::string *str)
 	{
-		cout << *str << endl;
+		std::cout << *str << std::endl;
 	}
 	return(0);
 }

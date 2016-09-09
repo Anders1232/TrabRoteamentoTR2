@@ -1,9 +1,7 @@
 #ifndef NODE_HPP
 #define NODE_HPP
 
-#include<iostream>
 #include <vector>
-#include<map>
 
 #define INFINITO -1
 
@@ -33,7 +31,7 @@ class Node
 		Node(const std::vector<int>& adj);
 		void receberTabela(const std::vector<RegRoteamento> &tabEstrangeira);
 		const std::vector<RegRoteamento>& obterTabela(void);
-		void imprimirTabela(void) ;
+		void imprimirTabela(void) const;
 	private:
 		std::vector<RegRoteamento> tabela;
 

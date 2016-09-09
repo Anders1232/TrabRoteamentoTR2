@@ -1,8 +1,10 @@
 #include"Grafo.hpp"
-#include<string>
-#include<cstdio>
 
 //#define DEBUG
+
+#ifdef DEBUG
+#include<cstdio>
+#endif
 
 Grafo::Grafo(std::string nomeArq)
 {
@@ -89,7 +91,6 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 			}
 			grafo[origem - 1][destino - 1]= peso;
 			grafo[destino - 1][origem - 1]= peso;
-printf("origem: %d\tdestino: %d\tpeso: %d\n", origem, destino, peso);
 #ifdef DEBUG
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 printf("origem: %d\tdestino: %d\tpeso: %d\n", origem, destino, peso);
@@ -110,7 +111,7 @@ int Grafo::obterNumNos(void)
 	return(grafo.size());
 }
 
-std::vector<int> Grafo::operator[](int pos)
+std::vector<int>& Grafo::operator[](int pos)
 {
 	return grafo[pos];
 }

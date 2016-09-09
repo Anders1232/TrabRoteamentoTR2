@@ -11,7 +11,7 @@ class Grafo
 	public:
 		Grafo(std::string nomeArq);
 		int obterNumNos(void);
-		std::vector<int> operator[](int pos);
+		std::vector<int>& operator[](int pos);
 	private:
 		std::vector<std::vector<int> > grafo;
 //membros especias

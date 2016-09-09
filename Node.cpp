@@ -1,3 +1,4 @@
+#include<iostream>
 #include"Node.hpp"
 
 Node::Node(const std::vector<int> &adj)
@@ -67,7 +68,7 @@ const std::vector<RegRoteamento>& Node::obterTabela(void)
 	return(tabela);
 }
 
-void Node::imprimirTabela(void)
+void Node::imprimirTabela(void)const
 {
 	for(unsigned int i = 0 ; i < tabela.size() ; i ++)
 	{
