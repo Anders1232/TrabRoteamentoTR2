@@ -4,7 +4,7 @@
 #include "Grafo.hpp"
 #include "Node.hpp"
 
-bool TabelasConvergiram(std::vector<Node*> nos)
+bool TabelasConvergiram(const std::vector<Node*> &nos)
 {
 	static bool primeiraVez=true;
 	static std::vector<std::vector<RegRoteamento> > iteracaoPassada;
@@ -61,10 +61,12 @@ int main(int argc,char **argv){
 		while(!TabelasConvergiram(nos))
 		{
 			numeroInteracoes++;
-			for( unsigned int cont =0 ; cont < (unsigned int)g.obterNumNos(); cont++)
+			for( unsigned int cont =0 ; cont < (unsigned int)g.obterNumNos(); cont++)//cada um nos nós
 			{
-				std::vector<int> vizinhos= g[cont];
-				for(unsigned int cont2=0; cont2< vizinhos.size(); cont++)
+				const std::vector<int> vizinhos= g[cont];
+				printf("O nó %d está repassando sua tabela aos vizinhos.\n", cont+1);
+				nos[cont]->imprimirTabela();
+				for(unsigned int cont2=0; cont2< vizinhos.size(); cont++)//vai repassa suas info para cada um dos vizinhos
 				{
 					if(vizinhos[cont2] != INFINITO)
 					{

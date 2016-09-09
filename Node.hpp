@@ -33,6 +33,8 @@ class Node
 		const std::vector<RegRoteamento>& obterTabela(void);
 		void imprimirTabela(void) const;
 	private:
+		int id;
+		int PosicaoNaTabela();//não pode ser um atributo pois pode variar durante a execução
 		std::vector<RegRoteamento> tabela;
 
 //membros especias

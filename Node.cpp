@@ -8,6 +8,10 @@ Node::Node(const std::vector<int> &adj)
 		if(adj[i] != INFINITO)
 		{
 			tabela.push_back({adj[i],(int)i});
+			if(0 == adj[i])
+			{
+				id= i;
+			}
 		}
 	}
 }
