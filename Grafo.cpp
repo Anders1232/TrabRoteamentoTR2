@@ -32,7 +32,7 @@ Grafo::Grafo(FILE *arq)
 		}
 		while(fscanf(arq, "%d[%d];", &aux1, &aux2))
 		{//suponho que no arquivo, os nodos do grafo estão indexados a partir de zero.
-			grafo[cont][aux].push_back(aux2);
+			grafo[cont][aux]= aux2;
 		}
 	}
 }

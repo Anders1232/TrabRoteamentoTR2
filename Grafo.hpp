@@ -3,7 +3,6 @@
 
 #include<cstdio>
 #include <vector>
-//#include"Aresta.hpp"
 
 using namespace std;
 
@@ -13,7 +12,7 @@ class Grafo
 		Grafo operator=(Grafo& g);
 		Grafo(FILE *arq);
 	private:
-		vector<vector<vector<int> > > grafo;
+		vector<vector<int> > grafo;
 };
 
 #endif
