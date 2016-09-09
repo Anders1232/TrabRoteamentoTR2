@@ -3,15 +3,17 @@
 
 #include<cstdio>
 #include <vector>
-#include"Aresta.hpp"
+//#include"Aresta.hpp"
+
+using namespace std;
 
 class Grafo
 {
 	public:
-		Grafo operator=(&Grafo g);
+		Grafo operator=(Grafo& g);
 		Grafo(FILE *arq);
 	private:
-		vector<vector<int>> *grafo;
-}
+		vector<vector<vector<int> > > grafo;
+};
 
 #endif
