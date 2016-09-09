@@ -1,6 +1,6 @@
 #include"Node.hpp"
 
-Node::Node(std::vector<int> adj)
+Node::Node(const std::vector<int> &adj)
 {
 	for(unsigned int i = 0 ; i < adj.size() ; i ++)
 	{
@@ -62,7 +62,7 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira)
 	}
 }
 
-const std::vector<RegRoteamento> Node::obterTabela(void)
+const std::vector<RegRoteamento>& Node::obterTabela(void)
 {
 	return(tabela);
 }

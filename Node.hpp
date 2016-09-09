@@ -13,7 +13,7 @@ struct RegRoteamento{
 	int peso;
 	int nodeSaida;
 
-	bool operator==(RegRoteamento cmp) const
+	inline bool operator==(RegRoteamento cmp) const
 	{
 		if(this->destino == cmp.destino && this->peso == cmp.peso && this->nodeSaida == cmp.nodeSaida)
 		{
@@ -21,21 +21,25 @@ struct RegRoteamento{
 		}
 		return false;
 	}
-	bool operator!=(RegRoteamento cmp) const
+	inline bool operator!=(RegRoteamento cmp) const
 	{
-		return(!(*(this) == cmp) );
+		return(!( (*this) == cmp) );//=D
 	}
 };
 
 class Node
 {
 	public:
-		Node(std::vector<int> adj);
+		Node(const std::vector<int>& adj);
 		void receberTabela(const std::vector<RegRoteamento> &tabEstrangeira);
-		const std::vector<RegRoteamento> obterTabela(void);
+		const std::vector<RegRoteamento>& obterTabela(void);
 		void imprimirTabela(void) ;
 	private:
 		std::vector<RegRoteamento> tabela;
+
+//membros especias
+		Node (const Node&);
+		Node& operator= (const Node&);
 };
 
 #endif
