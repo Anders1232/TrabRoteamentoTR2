@@ -1,4 +1,4 @@
-#include<iostream>
+#include<cstdio>
 #include"Node.hpp"
 
 Node::Node(const std::vector<int> &adj)
@@ -35,6 +35,9 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira)
 			break;
 		}
 	}
+	printf("No %d recebeu a tabela do no %d\n", id, quemEnviou);
+	printf("Estado da tabela antes do cálculo das rotas:\n");
+	imprimirTabela();
 
 	for(unsigned int posicaoTabelaEstrangeira = 0 ; posicaoTabelaEstrangeira < tabelaEstrangeira.size() ; posicaoTabelaEstrangeira ++)
 	{
@@ -65,6 +68,10 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira)
 			}
 		}
 	}
+	
+	printf("Estado da tabela após do cálculo das rotas:\n");
+	imprimirTabela();
+
 }
 
 const std::vector<RegRoteamento>& Node::obterTabela(void)
@@ -74,18 +81,10 @@ const std::vector<RegRoteamento>& Node::obterTabela(void)
 
 void Node::imprimirTabela(void)const
 {
+	printf("Imprimindo tabela do nó %d\n", id);
 	for(unsigned int i = 0 ; i < tabela.size() ; i ++)
 	{
-		if(tabela[i].peso == 0)
-		{
-			std::cout << "Imprimindo tabela do nó %d",tabela[i].destino;
-			break;
-		}
-	}
-
-	for(unsigned int i = 0 ; i < tabela.size() ; i ++)
-	{
-		std::cout << "\tdestino: %d \t peso: %d Nó de saída %d\n",tabela[i].destino,tabela[i].peso,tabela[i].nodeSaida;
+		printf("\tdestino: %d \t peso: %d Nó de saída %d\n",tabela[i].destino,tabela[i].peso,tabela[i].nodeSaida);
 	}
 }
 
