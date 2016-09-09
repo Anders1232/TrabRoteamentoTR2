@@ -1,2 +1,2 @@
 all:
-	g++ Grafo.cpp -Wall -pedantic
+	g++ Grafo.cpp main.cpp -g -Wall -pedantic   
