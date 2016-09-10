@@ -1,15 +1,29 @@
 #include<cstdio>
 #include"Node.hpp"
 
+#define DEBUG_NODE
+
 Node::Node(const std::vector<int> &adj)
 {
-	for(unsigned int i = 0 ; i < adj.size() ; i ++)
+#ifdef DEBUG_NODE
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
+	for(unsigned int i = 0 ; i < adj.size() ; i++)
 	{
-		if(adj[i] != INFINITO)
+#ifdef DEBUG_NODE
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
+		if(adj.at(i) != INFINITO)
 		{
-			tabela.push_back({adj[i],(int)i});
-			if(0 == adj[i])
+#ifdef DEBUG_NODE
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
+			tabela.push_back({adj.at(i),(int)i});
+			if(0 == adj.at(i) )
 			{
+#ifdef DEBUG_NODE
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 				id= i;
 			}
 		}
@@ -81,10 +95,10 @@ const std::vector<RegRoteamento>& Node::obterTabela(void)
 
 void Node::imprimirTabela(void)const
 {
-	printf("Imprimindo tabela do nó %d\n", id);
+	printf("Imprimindo tabela do nó %d\n", id+1);
 	for(unsigned int i = 0 ; i < tabela.size() ; i ++)
 	{
-		printf("\tdestino: %d \t peso: %d Nó de saída %d\n",tabela[i].destino,tabela[i].peso,tabela[i].nodeSaida);
+		printf("\tdestino: %d \t peso: %d Nó de saída %d\n",tabela[i].destino+1,tabela[i].peso,tabela[i].nodeSaida+1);
 	}
 }
 

@@ -4,6 +4,9 @@
 #include "Grafo.hpp"
 #include "Node.hpp"
 
+#define DEBUG_MAIN
+
+
 bool TabelasConvergiram(const std::vector<Node*> &nos)
 {
 	static bool primeiraVez=true;
@@ -37,8 +40,8 @@ bool TabelasConvergiram(const std::vector<Node*> &nos)
 	return true;
 }
 
-int main(int argc,char **argv){
-
+int main(int argc,char **argv)
+{
 	try
 	{
 		std::string nomeArq;
@@ -51,25 +54,43 @@ int main(int argc,char **argv){
 		{
 			nomeArq = argv[1];
 		}
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 		Grafo g(nomeArq);
-		for(unsigned int i = 0 ; i < (unsigned int)g.obterNumNos(); i ++)
+		for(int i = 0 ; i < g.obterNumNos(); i ++)
 		{
 			nos[i] = new Node(g[i]);
 		}
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 		int numeroInteracoes=0;
 		int numeroEnviosDeTablela=0;
 		while(!TabelasConvergiram(nos))
 		{
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 			numeroInteracoes++;
 			for( unsigned int cont =0 ; cont < (unsigned int)g.obterNumNos(); cont++)//cada um nos nós
 			{
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 				const std::vector<int> vizinhos= g[cont];
 				printf("O nó %d está repassando sua tabela aos vizinhos.\n", cont+1);
 				nos[cont]->imprimirTabela();
 				for(unsigned int cont2=0; cont2< vizinhos.size(); cont++)//vai repassa suas info para cada um dos vizinhos
 				{
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 					if(vizinhos[cont2] != INFINITO)
 					{
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 						numeroEnviosDeTablela++;
 						nos[cont2]->receberTabela(nos[cont]->obterTabela());
 					}
