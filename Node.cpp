@@ -7,8 +7,9 @@ Node::Node(const std::vector<int> &adj)
 {
 #ifdef DEBUG_NODE
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+printf("adj.size()= %lu\n", adj.size());
 #endif
-	for(unsigned int i = 0 ; i < adj.size() ; i++)
+	for(unsigned int i = 0 ; i < adj.size(); i++)
 	{
 #ifdef DEBUG_NODE
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
@@ -28,6 +29,9 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 			}
 		}
 	}
+#ifdef DEBUG_NODE
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 }
 
 void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira)
@@ -88,7 +92,7 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira)
 
 }
 
-const std::vector<RegRoteamento>& Node::obterTabela(void)
+const std::vector<RegRoteamento>& Node::obterTabela(void)const
 {
 	return(tabela);
 }

@@ -19,7 +19,7 @@ Grafo::Grafo(std::string nomeArq)
 #ifdef DEBUG
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #endif
-	int numeroDeLinhas=1;//o arquivo já começa com 1 linha
+	int numeroDeLinhas=0;//o arquivo já começa com 1 linha
 	while(EOF != fscanf(arq, "%c", &aux))
 	{
 #ifdef DEBUG
@@ -38,6 +38,7 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 	}
 #ifdef DEBUG
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+printf("numeroDeLinhas= %d\n", numeroDeLinhas);
 #endif
 
 	int origem, destino,peso;

@@ -58,9 +58,19 @@ int main(int argc,char **argv)
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #endif
 		Grafo g(nomeArq);
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+printf("g.obterNumNos(): %d\n", g.obterNumNos());
+#endif
 		for(int i = 0 ; i < g.obterNumNos(); i ++)
 		{
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 			nos[i] = new Node(g[i]);
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 		}
 #ifdef DEBUG_MAIN
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
