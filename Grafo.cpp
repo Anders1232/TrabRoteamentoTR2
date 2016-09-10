@@ -9,7 +9,7 @@
 Grafo::Grafo(std::string nomeArq)
 {
 	FILE *arq;
-	char aux;
+	char aux,aux2;
 
 	arq = fopen(nomeArq.c_str(),"r");
 	if(arq == NULL)
@@ -19,7 +19,7 @@ Grafo::Grafo(std::string nomeArq)
 #ifdef DEBUG_GRAFO
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #endif
-	int numeroDeLinhas=0;//o arquivo já começa com 1 linha
+	int numeroDeLinhas= 1;//o arquivo já começa com 1 linha
 	while(EOF != fscanf(arq, "%c", &aux))
 	{
 #ifdef DEBUG_GRAFO
@@ -28,6 +28,16 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 		if('\n'== aux)
 		{
 			numeroDeLinhas++;
+			aux2= getc(arq);
+			if(EOF == aux2)
+			{//se sim, o arquivo termina com um \n, que não deve ser contado pro numero de linhas
+				numeroDeLinhas--;
+printf("Esse arquivo ter um '\\n' a mais !\n");
+			}
+			else
+			{//senão desfaz essa última leitura e continua
+				ungetc(aux2, arq);
+			}
 		}
 	}
 	rewind(arq);
