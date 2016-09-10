@@ -62,6 +62,7 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 printf("g.obterNumNos(): %d\n", g.obterNumNos());
 #endif
+		nos.reserve(g.obterNumNos());
 		for(int i = 0 ; i < g.obterNumNos(); i ++)
 		{
 #ifdef DEBUG_MAIN

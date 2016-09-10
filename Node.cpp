@@ -102,7 +102,7 @@ void Node::imprimirTabela(void)const
 	printf("Imprimindo tabela do nó %d\n", id+1);
 	for(unsigned int i = 0 ; i < tabela.size() ; i ++)
 	{
-		printf("\tdestino: %d \t peso: %d Nó de saída %d\n",tabela[i].destino+1,tabela[i].peso,tabela[i].nodeSaida+1);
+		printf("\tdestino: %d \t peso: %d \tsaída: %d\n",tabela[i].destino+1,tabela[i].peso,tabela[i].nodeSaida+1);
 	}
 }
 

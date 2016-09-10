@@ -123,5 +123,8 @@ int Grafo::obterNumNos(void)
 
 std::vector<int>& Grafo::operator[](int pos)
 {
+#ifdef DEBUG
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 	return grafo.at(pos);
 }
