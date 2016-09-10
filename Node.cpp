@@ -1,7 +1,7 @@
 #include<cstdio>
 #include"Node.hpp"
 
-#define DEBUG_NODE
+//#define DEBUG_NODE
 
 Node::Node(const std::vector<int> &adj)
 {
@@ -19,7 +19,7 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #ifdef DEBUG_NODE
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #endif
-			tabela.push_back({adj.at(i),(int)i});
+			tabela.push_back({(int)i,adj.at(i),(int)i});
 			if(0 == adj.at(i) )
 			{
 #ifdef DEBUG_NODE
