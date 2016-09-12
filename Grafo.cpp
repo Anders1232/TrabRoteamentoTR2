@@ -32,7 +32,7 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 			if(EOF == aux2)
 			{//se sim, o arquivo termina com um \n, que não deve ser contado pro numero de linhas
 				numeroDeLinhas--;
-printf("Esse arquivo ter um '\\n' a mais !\n");
+//printf("Esse arquivo ter um '\\n' a mais !\n");
 			}
 			else
 			{//senão desfaz essa última leitura e continua

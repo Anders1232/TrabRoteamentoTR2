@@ -53,7 +53,7 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira)
 			break;
 		}
 	}
-	printf("No %d recebeu a tabela do no %d\n", id, quemEnviou);
+	printf("No %d recebeu a tabela do no %d\n", id+1, quemEnviou+1);
 	printf("Estado da tabela antes do cálculo das rotas:\n");
 	imprimirTabela();
 
