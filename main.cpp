@@ -1,43 +1,66 @@
 #include <iostream>
 #include <string>
-#include <stdbool.h>
+#include <cstdbool>
 #include "Grafo.hpp"
 #include "Node.hpp"
 
-//#define DEBUG_MAIN
+#define DEBUG_MAIN
 
+//#define BEBUG_GETCHAR_MAIN
 //#define BREAK_PRIMEIRA_PASSADA_TABELAS_CONVERGIRAM
 
 bool TabelasConvergiram(const std::vector<Node*> &nos)
 {
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 	static bool primeiraVez=true;
 	static std::vector<std::vector<RegRoteamento> > iteracaoPassada;
+	bool convergiu=true;
 	if(!primeiraVez)
 	{
 		for(unsigned int cont=0; cont < nos.size(); cont++)
 		{
 			if(iteracaoPassada[cont].size() != nos[cont]->obterTabela().size())
 			{
-				return false;
+				convergiu=false;
+				break;
 			}
-			for(unsigned int cont2=0; cont2< nos[cont]->obterTabela().size(); cont2++)
+			else if(nos[cont]->obterTabela().size() != nos.size())
 			{
-				if(nos[cont]->obterTabela()[cont2] != iteracaoPassada[cont][cont2])
+				convergiu=false;
+				break;
+			}
+			else
+			{
+				for(unsigned int cont2=0; cont2< nos[cont]->obterTabela().size(); cont2++)
 				{
-					return false;
+					if(nos[cont]->obterTabela()[cont2] != iteracaoPassada[cont][cont2])
+					{
+						convergiu=false;
+						break;
+					}
+				}
+				if(!convergiu)
+				{
+					break;
 				}
 			}
+		}
+		if(!convergiu)
+		{
+			for(int unsigned cont=0; cont < nos.size(); cont++)
+			{
+				iteracaoPassada.at(cont)= nos[cont]->obterTabela();
+			}
+			return false;
 		}
 	}
 	else
 	{
-#ifdef BREAK_PRIMEIRA_PASSADA_TABELAS_CONVERGIRAM
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-exit(0);
-#endif
 		for(int unsigned cont=0; cont < nos.size(); cont++)
 		{
-			iteracaoPassada[cont]=nos[cont]->obterTabela();
+			iteracaoPassada.push_back(nos[cont]->obterTabela());
 		}
 		primeiraVez = false;
 		return false;
@@ -65,17 +88,19 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 		Grafo g(nomeArq);
 #ifdef DEBUG_MAIN
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-printf("g.obterNumNos(): %d\n", g.obterNumNos());
+printf("g.obterNumNos()= %d\n", g.obterNumNos());
+//exit(0);
 #endif
-		nos.reserve(g.obterNumNos());
+//		nos.reserve(g.obterNumNos());
 		for(int i = 0 ; i < g.obterNumNos(); i ++)
 		{
 #ifdef DEBUG_MAIN
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #endif
-			nos[i] = new Node(g[i]);
+			nos.push_back(new Node(g[i]) );
 #ifdef DEBUG_MAIN
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+printf("i = %d\n", i);
 #endif
 		}
 #ifdef DEBUG_MAIN
@@ -83,6 +108,9 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #endif
 		int numeroInteracoes=0;
 		int numeroEnviosDeTablela=0;
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 		while(!TabelasConvergiram(nos))
 		{
 #ifdef DEBUG_MAIN
@@ -112,10 +140,13 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 					}
 				}
 			}
+#ifdef DEBUG_MAIN
+printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
+#endif
 		}
 		printf("-------------------------------------------------------\n");
 		printf("As tabelas convergiram =D\n");
-		printf("\t numero de iterações necessárias: %d\n", numeroInteracoes);
+		printf("\t numero de iterações necessárias: %d\n", numeroInteracoes-1);
 		printf("\t numero de trocas de tabela necessárias: %d\n", numeroEnviosDeTablela-g.obterNumNos());
 		printf("-------------------------------------------------------\n");
 	}
