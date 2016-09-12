@@ -2,8 +2,10 @@
 #define NODE_HPP
 
 #include <vector>
+#include<climits>
 
-#define INFINITO -1
+#define INFINITO INT_MAX/2
+
 
 struct RegRoteamento{
 	

@@ -1,10 +1,11 @@
 #ifndef GRAFO_HPP
 #define GRAFO_HPP
 
-#define INFINITO -1
-
-#include <vector>
+#include<vector>
 #include<string>
+#include<climits>
+
+#define INFINITO INT_MAX/2
 
 class Grafo
 {
