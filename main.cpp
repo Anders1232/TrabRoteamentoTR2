@@ -4,7 +4,7 @@
 #include "Grafo.hpp"
 #include "Node.hpp"
 
-#define DEBUG_MAIN
+//#define DEBUG_MAIN
 
 //#define BEBUG_GETCHAR_MAIN
 //#define BREAK_PRIMEIRA_PASSADA_TABELAS_CONVERGIRAM
@@ -68,6 +68,11 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 	return true;
 }
 
+bool CompararDestinos(RegRoteamento &a, RegRoteamento &b)
+{
+	return ( (a.destino) < (b.destino) );
+}
+
 int main(int argc,char **argv)
 {
 	try
@@ -123,7 +128,7 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #endif
 				const std::vector<int> vizinhos= g[cont];
-				printf("O nó %d está repassando sua tabela aos vizinhos.\n", cont+1);
+				printf("\n\nO nó %d está repassando sua tabela aos vizinhos.\n", cont+1);
 				nos[cont]->imprimirTabela();
 				for(unsigned int cont2=0; cont2< vizinhos.size(); cont2++)//vai repassa suas info para cada um dos vizinhos
 				{
