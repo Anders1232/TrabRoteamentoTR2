@@ -30,12 +30,10 @@ void MensagemDeAjuda(void)
 	printf("--verboso \t\t\tpara rodar o programa no modo muito verboso\n");
 	printf("-h \t\t\t\tpara exibir essa mensagem\n\n");
 }
-
+/*Método que verifica se os vetores do todos os nós convergiram comparando-os com seus valores na iretação anterior.
+Se todos permanecem iguais a iteração anterior significa que a topologia convergiu*/
 bool TabelasConvergiram(const std::vector<Node*> &nos)
 {
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
 	static bool primeiraVez=true;
 	static std::vector<std::vector<RegRoteamento> > iteracaoPassada;
 	bool convergiu=true;
@@ -89,7 +87,7 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 	}
 	return true;
 }
-
+//Função que compara o número de dois nós do grafo
 bool CompararDestinos(RegRoteamento &a, RegRoteamento &b)
 {
 	return ( (a.destino) < (b.destino) );
@@ -135,46 +133,29 @@ int main(int argc,char **argv)
 		{
 			nomeArq = argv[posicaoArquivo+1];
 		}
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
+		//Cria o grafo
 		Grafo g(nomeArq);
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-printf("g.obterNumNos()= %d\n", g.obterNumNos());
-//exit(0);
-#endif
-//		nos.reserve(g.obterNumNos());
+
+		//Cria uma cópia do grafo
 		for(int i = 0 ; i < g.obterNumNos(); i ++)
 		{
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
+
 			nos.push_back(new Node(g[i]) );
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-printf("i = %d\n", i);
-#endif
+
 		}
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
+
 		int numeroInteracoes=0;
 		int numeroEnviosDeTablela=0;
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
+		/*Enquanto as tabelas não convergiram,o programa realiza a troca de tabelas de modo sequencial,ou seja:
+		1) O primeiro nó envia seu vetor para seus vizinhos
+		2)Os vizinhos computam e obtêm um novo vetor.Esses enviam para seus vizinhos que voltam ao passo 1*/
 		while(!TabelasConvergiram(nos))
 		{
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
+
 			numeroInteracoes++;
 			for( unsigned int cont =0 ; cont < (unsigned int)g.obterNumNos(); cont++)//cada um nos nós
 			{
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
+
 				const std::vector<int> vizinhos= g[cont];
 				if(MODO_SILENCIOSO != modo)
 				{
@@ -183,22 +164,15 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 				}
 				for(unsigned int cont2=0; cont2< vizinhos.size(); cont2++)//vai repassa suas info para cada um dos vizinhos
 				{
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
+
 					if(vizinhos[cont2] != INFINITO && vizinhos[cont2] != 0)
 					{
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
+
 						numeroEnviosDeTablela++;
 						nos[cont2]->receberTabela(nos[cont]->obterTabela(), modo);
 					}
 				}
 			}
-#ifdef DEBUG_MAIN
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
 		}
 		printf("-------------------------------------------------------\n");
 		printf("As tabelas convergiram =D\n");

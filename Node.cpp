@@ -4,48 +4,45 @@
 
 //#define DEBUG_NODE
 
+//Construtor do objeto que representa um nó do grafo(topologia completa)
+//Recebe como argumento a linha na matriz de adjacências correspondente a esse nó
 Node::Node(const std::vector<int> &adj)
 {
-#ifdef DEBUG_NODE
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-printf("adj.size()= %lu\n", adj.size());
-#endif
+//Aqui tabela é um nome que representa vetor de distâncias
+//Constroi a tabela de adjacências desse nó
+//A tabela guarda o destino,o peso total do caminho e o nó de saída para cada outro nó do grafo
 	for(unsigned int i = 0 ; i < adj.size(); i++)
 	{
-#ifdef DEBUG_NODE
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
+
 		if(adj.at(i) != INFINITO)
 		{
-#ifdef DEBUG_NODE
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
+
 			tabela.push_back({(int)i,adj.at(i),(int)i});
+			//Se o peso for zero a posição corresponde a esse nó
 			if(0 == adj.at(i) )
 			{
-#ifdef DEBUG_NODE
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
+
 				id= i;
 			}
 		}
 	}
-#ifdef DEBUG_NODE
-printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
-#endif
-}
 
+}
+//Método que implementa o recebimento de uma tabela para um nó
 void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira, int modo)
 {
 	int quemEnviou, posicaoNaTabelaLocalDeQuemEnviou;
 	for(unsigned int i = 0 ; i < tabelaEstrangeira.size() ; i ++)
 	{
+		/*Deduz qual o nó que enviou a partir da informação de que em sua tabela
+		a distância para ele mesmo é zero*/
 		if(0 == tabelaEstrangeira[(int)i].peso)
 		{
 			quemEnviou= tabelaEstrangeira[i].destino;
 			break;
 		}
 	}
+	//Descobre a posição do nó remetente na tabela local
 	for(unsigned int i = 0 ; i < tabela.size() ; i ++)
 	{
 		if(tabela[i].destino == quemEnviou)
@@ -54,6 +51,7 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira, in
 			break;
 		}
 	}
+	//Defines para quantidade de informações a serem mostradas
 	if(MODO_SILENCIOSO != modo)
 	{
 		printf("No %d recebeu a tabela do no %d\n", id+1, quemEnviou+1);
@@ -63,10 +61,12 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira, in
 		printf("Estado da tabela antes do cálculo das rotas:\n");
 		imprimirTabela();
 	}
-
+	//Nesse loop é implementado o algoritmo de Belmann-Ford
+	/*Para cada posição de vetor de distâncias do remetente,calcula um peso candidato e o sustitui na tabela local caso necessário*/
 	for(unsigned int posicaoTabelaEstrangeira = 0 ; posicaoTabelaEstrangeira < tabelaEstrangeira.size() ; posicaoTabelaEstrangeira ++)
 	{
 		int posicaoNaMinhaTabelaDaEntradaEstrangeiraAnalisada= -1;
+		//Loop para descobrir qual é a posição do destino que está sendo analisado no vetor de distâncias local
 		for(int posicaoTabelaLocal =0 ; (unsigned int)posicaoTabelaLocal < tabela.size(); posicaoTabelaLocal++)
 		{
 			if(tabelaEstrangeira[posicaoTabelaEstrangeira].destino == tabela[posicaoTabelaLocal].destino)
@@ -75,6 +75,7 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira, in
 				break;
 			}
 		}
+		//Calculo da fórmula de bellman ford
 		int pesoCandidato = tabelaEstrangeira[posicaoTabelaEstrangeira].peso + tabela[posicaoNaTabelaLocalDeQuemEnviou].peso;
 		if(-1 == posicaoNaMinhaTabelaDaEntradaEstrangeiraAnalisada)
 		{//esse destino nao tem na tabela local, adicionemos
@@ -85,7 +86,8 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira, in
 			});
 		}
 		else
-		{//Tem-se o destino na tabela local, verificar se precisa atualizar
+		{/*Tem-se o destino na tabela local, verificar se precisa atualizar,ou seja,se o peso candidato calculado anteriormente 
+		é menor que o atual ou não*/
 			if(pesoCandidato < tabela[posicaoNaMinhaTabelaDaEntradaEstrangeiraAnalisada].peso)
 			{
 				tabela[posicaoNaMinhaTabelaDaEntradaEstrangeiraAnalisada].peso= pesoCandidato;
@@ -99,12 +101,12 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira, in
 		imprimirTabela();
 	}
 }
-
+//Método que retorna o vetor de distâncias do nó corrente
 const std::vector<RegRoteamento>& Node::obterTabela(void)const
 {
 	return(tabela);
 }
-
+//Imprime o vetor de distâncias local
 void Node::imprimirTabela(void)const
 {
 	printf("\nImprimindo tabela do nó %d\n", id+1);
