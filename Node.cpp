@@ -1,5 +1,6 @@
 #include<cstdio>
 #include"Node.hpp"
+#include "modos.h"
 
 //#define DEBUG_NODE
 
@@ -34,7 +35,7 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #endif
 }
 
-void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira)
+void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira, int modo)
 {
 	int quemEnviou, posicaoNaTabelaLocalDeQuemEnviou;
 	for(unsigned int i = 0 ; i < tabelaEstrangeira.size() ; i ++)
@@ -53,9 +54,15 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira)
 			break;
 		}
 	}
-	printf("No %d recebeu a tabela do no %d\n", id+1, quemEnviou+1);
-	printf("Estado da tabela antes do cálculo das rotas:\n");
-	imprimirTabela();
+	if(MODO_SILENCIOSO != modo)
+	{
+		printf("No %d recebeu a tabela do no %d\n", id+1, quemEnviou+1);
+	}
+	if(MODO_MUITO_VERBOSO == modo)
+	{
+		printf("Estado da tabela antes do cálculo das rotas:\n");
+		imprimirTabela();
+	}
 
 	for(unsigned int posicaoTabelaEstrangeira = 0 ; posicaoTabelaEstrangeira < tabelaEstrangeira.size() ; posicaoTabelaEstrangeira ++)
 	{
@@ -86,10 +93,11 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira)
 			}
 		}
 	}
-	
-	printf("Estado da tabela após do cálculo das rotas:\n");
-	imprimirTabela();
-
+	if(MODO_VERBOSO == modo || MODO_MUITO_VERBOSO == modo)
+	{
+		printf("Estado da tabela após do cálculo das rotas:\n");
+		imprimirTabela();
+	}
 }
 
 const std::vector<RegRoteamento>& Node::obterTabela(void)const
@@ -99,7 +107,7 @@ const std::vector<RegRoteamento>& Node::obterTabela(void)const
 
 void Node::imprimirTabela(void)const
 {
-	printf("Imprimindo tabela do nó %d\n", id+1);
+	printf("\nImprimindo tabela do nó %d\n", id+1);
 	for(unsigned int i = 0 ; i < tabela.size() ; i ++)
 	{
 		printf("\tdestino: %d \t peso: %d \tsaída: %d\n",tabela[i].destino+1,tabela[i].peso,tabela[i].nodeSaida+1);

@@ -35,7 +35,7 @@ namespace ArgumentAnalizer
 	{
 		for(int cont =0 ; cont < argc ; cont++)
 		{
-			if(!strcmp(argumentoEsperado, argv[cont]))
+			if(!strcmp(wantedArtgument, argv[cont]))
 			{
 				return cont;
 			}

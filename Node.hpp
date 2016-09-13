@@ -31,7 +31,7 @@ class Node
 {
 	public:
 		Node(const std::vector<int>& adj);
-		void receberTabela(const std::vector<RegRoteamento> &tabEstrangeira);
+		void receberTabela(const std::vector<RegRoteamento> &tabEstrangeira, int modo);
 		const std::vector<RegRoteamento>& obterTabela(void) const;
 		void imprimirTabela(void) const;
 	private:

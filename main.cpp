@@ -3,6 +3,8 @@
 #include <cstdbool>
 #include "Grafo.hpp"
 #include "Node.hpp"
+#include "ArgumentAnalizer.h"
+#include "modos.h"
 
 //#define DEBUG_MAIN
 
@@ -77,6 +79,22 @@ int main(int argc,char **argv)
 {
 	try
 	{
+		//Analisar os argumentos de linha de comando
+		int modo= MODO_NORMAL;
+		if(SEARCH_FAILED != ArgumentAnalizer::FindArgument("-s", argc, argv))
+		{
+			modo= MODO_SILENCIOSO;
+		}
+		if(SEARCH_FAILED != ArgumentAnalizer::FindArgument("-v", argc, argv))
+		{
+			modo= MODO_VERBOSO;
+		}
+		if(SEARCH_FAILED != ArgumentAnalizer::FindArgument("--verboso", argc, argv))
+		{
+			modo= MODO_MUITO_VERBOSO;
+		}
+		
+		//Agora sim o programa em si
 		std::string nomeArq;
 		std::vector<Node*> nos;
 		if(1 == argc){
@@ -128,8 +146,11 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #endif
 				const std::vector<int> vizinhos= g[cont];
-				printf("\n\nO nó %d está repassando sua tabela aos vizinhos.\n", cont+1);
-				nos[cont]->imprimirTabela();
+				if(MODO_SILENCIOSO != modo)
+				{
+					printf("\nO nó %d está repassando sua tabela aos vizinhos.\n", cont+1);
+					nos[cont]->imprimirTabela();
+				}
 				for(unsigned int cont2=0; cont2< vizinhos.size(); cont2++)//vai repassa suas info para cada um dos vizinhos
 				{
 #ifdef DEBUG_MAIN
@@ -141,7 +162,7 @@ printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
 #endif
 						numeroEnviosDeTablela++;
-						nos[cont2]->receberTabela(nos[cont]->obterTabela());
+						nos[cont2]->receberTabela(nos[cont]->obterTabela(), modo);
 					}
 				}
 			}
