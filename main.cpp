@@ -11,6 +11,26 @@
 //#define BEBUG_GETCHAR_MAIN
 //#define BREAK_PRIMEIRA_PASSADA_TABELAS_CONVERGIRAM
 
+void MensagemDeBoasVindas(void)
+{
+	printf("-------------------------------------------------------\n");
+	printf("Trabalho de Roteamento de TR2  Copyleft 2016  Francisco Anderson Bezerra Rodrigues e Vitor Silva de Deus\n");
+	printf("This program comes with ABSOLUTELY NO WARRANTY;\n");
+	printf("This is free software, and you are welcome to redistribute it under certain conditions;\n");
+	printf("-------------------------------------------------------\n");
+}
+
+void MensagemDeAjuda(void)
+{
+	printf("Modo de usar: ");
+	printf("'NomeDoExecutavel' [OPCOES]*\nAs possiveis opcoes sao:\n");
+	printf("-i 'NomeDoArquivo'\t\tpara informar o arquivo com a descricao do grafo\n");
+	printf("-s \t\t\t\tpara rodar o programa no modo silencioso\n");
+	printf("-v \t\t\t\tpara rodar o programa no modo verboso\n");
+	printf("--verboso \t\t\tpara rodar o programa no modo muito verboso\n");
+	printf("-h \t\t\t\tpara exibir essa mensagem\n\n");
+}
+
 bool TabelasConvergiram(const std::vector<Node*> &nos)
 {
 #ifdef DEBUG_MAIN
@@ -77,9 +97,18 @@ bool CompararDestinos(RegRoteamento &a, RegRoteamento &b)
 
 int main(int argc,char **argv)
 {
+	MensagemDeBoasVindas();
 	try
 	{
 		//Analisar os argumentos de linha de comando
+		if(argc == 1 || SEARCH_FAILED != ArgumentAnalizer::FindArgument("-h", argc, argv))
+		{
+			MensagemDeAjuda();
+		}
+		if(SEARCH_FAILED != ArgumentAnalizer::FindArgument("-h", argc, argv))
+		{
+			return 0;
+		}
 		int modo= MODO_NORMAL;
 		if(SEARCH_FAILED != ArgumentAnalizer::FindArgument("-s", argc, argv))
 		{
@@ -97,13 +126,14 @@ int main(int argc,char **argv)
 		//Agora sim o programa em si
 		std::string nomeArq;
 		std::vector<Node*> nos;
-		if(1 == argc){
+		int posicaoArquivo = ArgumentAnalizer::FindArgument("-i", argc, argv);
+		if(SEARCH_FAILED == posicaoArquivo){
 			std::cout <<"Informe o nome do arquivo\n";
 			std::cin >> nomeArq;
 		}
 		else
 		{
-			nomeArq = argv[1];
+			nomeArq = argv[posicaoArquivo+1];
 		}
 #ifdef DEBUG_MAIN
 printf("checkpoint: %s\t\t%d\n", __FILE__, __LINE__);
