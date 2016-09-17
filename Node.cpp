@@ -1,4 +1,5 @@
 #include<cstdio>
+#include<algorithm>
 #include"Node.hpp"
 #include "modos.h"
 
@@ -95,6 +96,7 @@ void Node::receberTabela(const std::vector<RegRoteamento> &tabelaEstrangeira, in
 			}
 		}
 	}
+	std::sort(tabela.begin(), tabela.end());
 	if(MODO_VERBOSO == modo || MODO_MUITO_VERBOSO == modo)
 	{
 		printf("Estado da tabela após do cálculo das rotas:\n");

@@ -87,11 +87,6 @@ bool TabelasConvergiram(const std::vector<Node*> &nos)
 	}
 	return true;
 }
-//Função que compara o número de dois nós do grafo
-bool CompararDestinos(RegRoteamento &a, RegRoteamento &b)
-{
-	return ( (a.destino) < (b.destino) );
-}
 
 int main(int argc,char **argv)
 {

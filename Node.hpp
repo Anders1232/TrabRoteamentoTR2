@@ -25,6 +25,11 @@ struct RegRoteamento{
 	{
 		return(!( (*this) == cmp) );//=D
 	}
+	//Função que compara o número de dois nós do grafo
+	inline bool operator<(/*const RegRoteamento &a,*/ const RegRoteamento &b)const
+	{
+		return ( (this->destino) < (b.destino) );
+	}
 };
 //Classe que representa o nó
 class Node
