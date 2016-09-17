@@ -137,7 +137,7 @@ int main(int argc,char **argv)
 		Grafo g(nomeArq);
 
 		//Cria uma cópia do grafo
-		for(int i = 0 ; i < g.obterNumNos(); i ++)
+		for(int i = 0 ; i < g.ObterNumeroDeNos(); i ++)
 		{
 
 			nos.push_back(new Node(g[i]) );
@@ -153,7 +153,7 @@ int main(int argc,char **argv)
 		{
 
 			numeroInteracoes++;
-			for( unsigned int cont =0 ; cont < (unsigned int)g.obterNumNos(); cont++)//cada um nos nós
+			for( unsigned int cont =0 ; cont < (unsigned int)g.ObterNumeroDeNos(); cont++)//cada um nos nós
 			{
 
 				const std::vector<int> vizinhos= g[cont];
@@ -177,7 +177,7 @@ int main(int argc,char **argv)
 		printf("-------------------------------------------------------\n");
 		printf("As tabelas convergiram =D\n");
 		printf("\t numero de iterações necessárias: %d\n", numeroInteracoes-1);
-		printf("\t numero de trocas de tabela necessárias: %d\n", numeroEnviosDeTablela-g.obterNumNos());
+		printf("\t numero de trocas de tabela necessárias(incluindo as redundantes): %d\n", numeroEnviosDeTablela- 2*g.ObterNumeroDeArestas()/*-g.obterNumNos()*/);
 		printf("-------------------------------------------------------\n");
 	}
 	catch(std::string *str)

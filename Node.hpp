@@ -2,9 +2,9 @@
 #define NODE_HPP
 
 #include <vector>
-#include<climits>
+//#include<climits>
 
-#define INFINITO INT_MAX/2
+#define INFINITO -1
 //Estrutura que representa cada posição do vetor de distâncias
 struct RegRoteamento{
 	

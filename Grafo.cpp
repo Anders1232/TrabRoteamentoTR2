@@ -93,14 +93,32 @@ Grafo::Grafo(std::string nomeArq)
 	fclose(arq);
 
 }
+
 //Método para retornar o tamanho(dimensão) da matriz ou grafo
-int Grafo::obterNumNos(void)
+int Grafo::ObterNumeroDeNos(void)
 {
 	return(grafo.size());
 }
+
 //Redefinição do operador '[]' nessa classe.O mesmo passa a retornar uma linha inteira da matriz
 std::vector<int>& Grafo::operator[](int pos)
 {
-
 	return grafo.at(pos);
 }
+
+int Grafo::ObterNumeroDeArestas(void)
+{
+	int retorno=0;
+	for(unsigned int cont1=0; cont1 < grafo.size()-1; cont1++)
+	{
+		for(unsigned int cont2= cont1+1; cont2< grafo.size(); cont2++)
+		{
+			if(INFINITO != grafo[cont1][cont2])
+			{
+				retorno++;
+			}
+		}
+	}
+	return retorno;
+}
+
