@@ -172,7 +172,7 @@ int main(int argc,char **argv)
 		printf("-------------------------------------------------------\n");
 		printf("As tabelas convergiram =D\n");
 		printf("\t numero de iterações necessárias: %d\n", numeroInteracoes-1);
-		printf("\t numero de trocas de tabela necessárias(incluindo as redundantes): %d\n", numeroEnviosDeTablela- 2*g.ObterNumeroDeArestas()/*-g.obterNumNos()*/);
+		printf("\t numero de trocas de tabela necessárias: %d\n", numeroEnviosDeTablela- 2*g.ObterNumeroDeArestas()/*-g.obterNumNos()*/);
 		printf("-------------------------------------------------------\n");
 	}
 	catch(std::string *str)
