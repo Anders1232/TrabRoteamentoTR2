@@ -1,5 +1,3 @@
-# TrabRoteamentoTR2
-
 Componentes do grupo:
 
 Vitor Silva de Deus 110143574
